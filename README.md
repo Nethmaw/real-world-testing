@@ -16,8 +16,6 @@ This project uses NextJS and its pages router to serve a React frontend. The bac
 
 The database is managed by Prisma; for simplicity’s sake it uses a sqlite database, but it can be easily changed to any other database supported by Prisma.
 
-Testing is done using Playwright for the Frontend und currently only the official RealWorld API Postman tests for the backend.
-
 # Project Structure
 
 - `prisma` - The Prisma schema and sqlite database
@@ -33,7 +31,7 @@ Testing is done using Playwright for the Frontend und currently only the officia
 Install all the dependencies, this will also set up the prisma sqlite database.
 
 ```bash
-cd realworld-testing
+cd real-world-testing
 npm install
 ```
 
