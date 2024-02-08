@@ -21,6 +21,10 @@
         {
             "name": "PASSWORD",
             "value": ""
+        },
+        {
+            "name": "token",
+            "value": ""
         }
     ]
 }

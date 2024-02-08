@@ -47,13 +47,22 @@ npm run dev
 
 1. Install [ThunderClient](https://marketplace.visualstudio.com/items?itemName=rangav.vscode-thunder-client) for VSCode.
 
-2. Open the `ConduitAPI.environment.json` file and fill in the three blank `value` fields.
-3. Save.
+2. Open the `ConduitAPI.environment.json` file and fill in the following three blank `value` fields.
+    - Username - a username for the application, different from one used in the GUI
+    - Email - an api testing email, different from GUI user
+    - Password - a password for the api user
+3.  Save.
+   
+4.  Open the ThunderClient panel inside VSCode and go to 'Env'
+5.  Click on the hamburger menu next to the `filter environment` search box and click Import.
+6.  Find and open `ConduitAPI.environment.json` in the root folder.
 
-4. Open the ThunderClient panel inside VSCode and go to 'Collections'.
-5. Click on the hamburger menu and click Import.
-6. Find and open `ConduitAPI.collection.json` in the root folder.
+7.  Open the Collections tab inside the ThunderClient panel.
+8.  Click on the similar hamburger menu and click Import.
+9.  Find and open `ConduitAPI.collection.json` in the root folder.
 
-7. Open the Env tab inside the ThunderClient panel.
-8. Click on the hamburger menu and click Import.
-9. Find and open `ConduitAPI.environment.json` in the root folder.
+10. Open the `ConduitAPI > Auth > Register` endpoint and click 'Send'
+11. Open the `ConduitAPI > Auth > Login` endpoint and click 'Send'
+12. Select and copy the token string from the response pane. Do not select the `"` marks at either end.
+13. Open the Env panel and then ConduitAPI.
+14. Paste into the `token` value and click 'Save'
