@@ -13,7 +13,7 @@ export const TagInput: FC<TagInputProps> = ({ article, setTagList, tagList }) =>
       <input
         type="text"
         className="form-control"
-        placeholder="Enter tags"
+        placeholder="Enter tags (Type tag then press Enter to apply)"
         disabled={!!article}
         onKeyDown={e => {
           if (e.key !== 'Enter' || !!article) {
