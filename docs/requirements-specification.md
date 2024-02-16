@@ -32,12 +32,25 @@
 
     - 3.1.2	User Interface  
 
-    - 3.1.2.1	User Registration  
+		-   3.1.2.1 Navigation Bar
 
-    - 3.1.2.2	User Login  
+		-   3.1.2.2 Homepage
 
-    - 3.1.2.3	User Interactions  
+		-   3.1.2.3	Article
 
+		-   3.1.2.4	Sign in
+
+		-   3.1.2.5	Sign Up
+
+		-   3.1.2.6	Your Feed
+
+		-   3.1.2.7	New Article
+
+		-   3.1.2.8	Settings
+		
+        -   3.1.2.9	Profile Settings
+        
+        -   3.1.2.10 Author Profile
  
     3.2      Non-Functional Requirements   
 
@@ -158,8 +171,8 @@ Authorization: `Token <token string>`
 ## Registration:  
 
 | Method | URL                       |
-|--------|---------------------------|
-| POST   | localhost:3000/api/users/ |  
+| ------ | ------------------------- |
+| POST   | localhost:3000/api/users/ |
 
 
 
@@ -178,9 +191,9 @@ No authentication required – returns a User
 
 ## Authentication:
 
-| Method | URL                       |
-|--------|---------------------------|
-| POST   | localhost:3000/api/users/login |  
+| Method | URL                            |
+| ------ | ------------------------------ |
+| POST   | localhost:3000/api/users/login |
 
 Example request body:  
 
@@ -195,16 +208,16 @@ Required fields:  email, password
 No authentication required – returns a User
 
 ## Get Current User:
-| Method | URL                       |
-|--------|---------------------------|
-| GET    | localhost:3000/api/user/ |  
+| Method | URL                      |
+| ------ | ------------------------ |
+| GET    | localhost:3000/api/user/ |
 
 Authentication required – returns a User that's the current user
 
 ## Update User 
-| Method | URL                       |
-|--------|---------------------------|
-| PUT    | localhost:3000/api/user/ | 
+| Method | URL                      |
+| ------ | ------------------------ |
+| PUT    | localhost:3000/api/user/ |
 
 Example request body:
 
@@ -221,34 +234,34 @@ Accepted fields: email, username, password, image, bio
 Authentication required – returns the User
 
 ## Get Profile 
-| Method | URL                       |
-|--------|---------------------------|
-| GET  | localhost:3000/api/profiles/:username |   
+| Method | URL                                   |
+| ------ | ------------------------------------- |
+| GET    | localhost:3000/api/profiles/:username |
 
 Authentication optional –  returns a  Profile
 
 ## Follow user 
-| Method | URL                       |
-|--------|---------------------------|
-| POST  | localhost:3000/api/profiles/:username/follow |   
+| Method | URL                                          |
+| ------ | -------------------------------------------- |
+| POST   | localhost:3000/api/profiles/:username/follow |
 
 Authentication required – returns a  Profile  
 
 No additional parameters required
 
 ## Unfollow user 
-| Method | URL                       |
-|--------|---------------------------|
-| DELETE | localhost:3000/api/profiles/:username/follow |   
+| Method | URL                                          |
+| ------ | -------------------------------------------- |
+| DELETE | localhost:3000/api/profiles/:username/follow |
 
 Authentication required – returns a  Profile  
 
 No additional parameters required
 
 ## List Articles 
-| Method | URL                       |
-|--------|---------------------------|
-| GET  | localhost:3000/api/articles |   
+| Method | URL                         |
+| ------ | --------------------------- |
+| GET    | localhost:3000/api/articles |
 
 Returns most recent articles globally by default  
 
@@ -270,23 +283,23 @@ Favourited by user:
 Authentication optional – will return multiple articles, ordered by the most recent first
 
 ## Feed Articles 
-| Method | URL                       |
-|--------|---------------------------|
-| GET  | localhost:3000/api/articles/feed |    
+| Method | URL                              |
+| ------ | -------------------------------- |
+| GET    | localhost:3000/api/articles/feed |
 
 Authentication required – will return multiple articles created by followed users, ordered by the most recent first.
 
 ## Get Article 
-| Method | URL                       |
-|--------|---------------------------|
-| GET  | localhost:3000/api/articles/:slug |    
+| Method | URL                               |
+| ------ | --------------------------------- |
+| GET    | localhost:3000/api/articles/:slug |
 
 No authentication required – will return single article
 
 ## Create Article 
-| Method | URL                       |
-|--------|---------------------------|
-| POST | localhost:3000/api/articles/ |    
+| Method | URL                          |
+| ------ | ---------------------------- |
+| POST   | localhost:3000/api/articles/ |
 
 Example request body:  
 
@@ -306,9 +319,9 @@ Required fields: title, description, body
 Optional fields: tagList as an array of Strings
 
 ## Update Article 
-| Method | URL                       |
-|--------|---------------------------|
-| PUT | localhost:3000/api/articles/:slug |    
+| Method | URL                               |
+| ------ | --------------------------------- |
+| PUT    | localhost:3000/api/articles/:slug |
 
 Example request body:  
 
@@ -326,16 +339,16 @@ The slug also gets updated when the title is changed.
 
 
 ## Delete Article 
-| Method | URL                       |
-|--------|---------------------------|
-| DELETE  | localhost:3000/api/articles/:slug |    
+| Method | URL                               |
+| ------ | --------------------------------- |
+| DELETE | localhost:3000/api/articles/:slug |
 
 Authentication required
 
 ## Add Comments to an Article 
-| Method | URL                       |
-|--------|---------------------------|
-| POST  | localhost:3000/api/articles/:slug/comments |   
+| Method | URL                                        |
+| ------ | ------------------------------------------ |
+| POST   | localhost:3000/api/articles/:slug/comments |
 
 Example request body:  
 
@@ -350,41 +363,41 @@ Authentication required – returns the created Comment
 Required field: body
 
 ## Get Comments from an Article 
-| Method | URL                       |
-|--------|---------------------------|
-| GET  |localhost:3000/api/articles/:slug/comments |   
+| Method | URL                                        |
+| ------ | ------------------------------------------ |
+| GET    | localhost:3000/api/articles/:slug/comments |
 
 Authentication optional – returns multiple comments
 
 ## Delete Comment 
-| Method | URL                       |
-|--------|---------------------------|
-| DELETE  | localhost:3000/api/articles/:slug/comments/:id |  
+| Method | URL                                            |
+| ------ | ---------------------------------------------- |
+| DELETE | localhost:3000/api/articles/:slug/comments/:id |
 
 Authentication required
 
 ## Favourite Article 
-| Method | URL                       |
-|--------|---------------------------|
-| POST  |localhost:3000/api/articles/:slug/favorite |    
+| Method | URL                                        |
+| ------ | ------------------------------------------ |
+| POST   | localhost:3000/api/articles/:slug/favorite |
 
 Authentication required –  returns the Article  
 
 No additional parameters required
 
 ## Unfavourite Article 
-| Method | URL                       |
-|--------|---------------------------|
-| DELETE  | localhost:3000/api/articles/:slug/favorite |    
+| Method | URL                                        |
+| ------ | ------------------------------------------ |
+| DELETE | localhost:3000/api/articles/:slug/favorite |
 
 Authentication required – returns the Article  
 
 No additional parameters required
 
 ## Get Tags 
-| Method | URL                       |
-|--------|---------------------------|
-| GET  | localhost:3000/api/tags |    
+| Method | URL                     |
+| ------ | ----------------------- |
+| GET    | localhost:3000/api/tags |
 
 No authentication required – returns a List of Tags
 
@@ -415,204 +428,143 @@ If a request fails any validations, expect a 422 and errors in the following for
 
 ## 3.1.2    User Interface
 
-## 3.1.2.1	User Registration:
+### 3.1.2.1	Navigation Bar:
 
-•	The website SHOULD provide user registration functionality for new users.
-
-### Unregistered users:
-
-•	SHOULD be shown a navigation bar containing the following buttons: ‘Conduit’, ‘Home’, ‘Sign In’ and ‘Sign Up’.
-
-•	SHOULD be able to navigate to the home page by clicking on the ‘Home’ button (within the navigation bar) or the brand button ‘Conduit’ (found within both the navigation bar and footer). 
-
-•	SHOULD be able to view article posts on separate pages by using the page counter.
-
-•	SHOULD be redirected to the ‘Thinkster’ website by clicking on the ‘Thinkster’ link within the footer. 
-
-•	SHOULD be shown in the 'Global Feed' section.
-
-•	SHOULD be able to view a registered user's profile page by clicking on their username within the ‘Global Feed’ section.
-
-•	SHOULD be able to read an entire article by clicking on the 'Read more…’ link.
-
-•	SHOULD have access to the ‘Popular Tags’ column and can filter articles by clicking on one of the tags.
-
-•	SHOULD be shown the username, email and password fields when navigating to the ‘Sign Up’ page.
-
-•	SHOULD be able to register on the ‘Sign Up’ page and be logged into their new account, granted that they provide: 
-
-  -	A username that doesn’t already exist.  
-
--	A valid email address consists of an email prefix and an email domain. The prefix appears to the left of the @ symbol. The domain appears to the right of the @ symbol.   
-
--	A password consisting of at least 8 characters.
-
-•	SHOULD NOT be able to ‘like’ articles by clicking on the ‘heart’ icons. Doing so should redirect unregistered users to the ‘Sign Up’ page.
-
-•	SHOULD NOT be able to follow/unfollow a registered user.
-
-•	SHOULD NOT be able to comment on an article.
-
-### Registered users:
-
-•	SHOULD be shown a navigation bar containing the following buttons: ‘Conduit’, ‘Home’, ‘New Article’, ‘Settings’ and ‘\<profile username>’.
-
-•	SHOULD be able to navigate to the home page by clicking on the 'Home' button (within the navigation bar) or the brand button 'Conduit' (found within both the navigation bar and footer). 
-
-•	SHOULD be able to view article posts on separate pages by using the page counter.
-
-•	SHOULD be redirected to the 'Thinkster' website by clicking on the 'Thinkster' link within the footer. 
-
-•	SHOULD be shown the ‘Your Feed’ and ‘Global Feed’ sections.
-
-•	SHOULD be able to view a registered user's profile page by clicking on their username.
-
-•	SHOULD be able to read an entire article by clicking on the 'Read more…' link.
-
-•	SHOULD have access to the 'Popular Tags' column, and can filter articles by clicking on one of the tags.
-
-•	SHOULD be able to ‘like’ articles by clicking on the ‘heart’ icons.
-
-•	SHOULD be able to follow/unfollow a registered user.
-
-•	SHOULD be able to publish a new article.
-
-•	SHOULD be able to edit and delete their own articles.
-
-•	SHOULD be able to comment on an article.
-
-•	SHOULD be able to update their profile settings.
-
-•	SHOULD be able to log out of their account.
-
-•	SHOULD NOT be able to edit or delete the articles of other users.
-
-
-## 3.1.2.2	User Login:
-
-•	SHOULD be shown the username and password fields once on the ‘Sign In’ page.
-
-•	SHOULD log a user into the system once they have provided valid credentials.
-
-•	SHOULD display an error message if the user provides an invalid email address, a password that is not at least 8 characters long or a password that does not match one held by a registered user. 
-
-## 3.1.2.3	User Interactions:
-
-•	Home Page:  
-
-- 	Your Feed:  
-
-SHOULD display the articles of the users that the current registered user is following.  
-
--	Global Feed:  
-
-SHOULD display all the articles which have been published on the website.  
-
--	Popular Tags:   
-
-    -	Clicking on a tag within the ‘Popular Tags’ column SHOULD cause another section called ‘#<selected tag>’ to appear next to the ‘Global Feed’.  
-
-    -	Only articles with the selected tag SHOULD be displayed within the ‘#<selected tag>’ column.  
-
-    -	A user SHOULD NOT be able to select multiple tags simultaneously.  
+* Before a user is logged in, the navigation bar should display the following buttons: ‘Conduit’, ‘Home’, ‘Sign In’ and ‘Sign Up’.
   
--	Liking:  
+  1.	**Registered Users**
+  
+        Once a registered user has logged into their account, the navigation bar should change. Instead, it should display the following buttons: ‘Conduit’, ‘Home’, ‘New Article’, ‘Settings’ and ‘< profile username >’.
+  
+  2.	**Unregistered Users**
+  
+        The navigation bar should not change for unregistered users.
 
-    -	The registered user SHOULD be able to ‘like’ an article by clicking on the love heart adjacent to it, thus causing said article to be added to the ‘Favourited Articles’.  
+### 3.1.2.2	Homepage
 
--	Viewing the profile of other users:
+* When both registered and non-registered users navigate the homepage, they can browse all articles in the global feed, where clicking on the ‘read more’ link on an article allows users to read the full article. Users of both registered and non-registered can click on author names in the Global Feed to view their profiles and can filter articles by clicking on tags in the popular tags section. They also can favourite articles directly on the global feed page and view more articles from clicking on the navigation page number underneath the list of articles. 
+  
+  1.	**Registered Users**
+  
+        Registered users have the option of clicking your feed to view articles from users they follow, and have the option to access their settings, profile, home, and new article from the navigation pane.
+  
+  2.	**Unregistered Users**
+  
+        Unregistered users, however, have the option of signing in, signing up and viewing the homepage.
 
-    -	Once the registered user has clicked on another username, they SHOULD be redirected to the latter’s profile page.
- 
-    -	The latter user’s profile page SHOULD display all articles published by said user.
+### 3.1.2.3	Article
 
--	Viewing the entire article of another user:
+1.	**Registered Users**
 
-    -	Once the registered user has clicked on the ‘Read more…’ link of a particular article, they SHOULD be redirected to a page that fully displays the article.
+    In the article section, registered users possess the capability to not only view articles authored by other users but also to engage with them by posting comments, favouriting articles, following other users, and navigating to the users' profile by clicking on the user’s profile link. They are empowered to manage their own articles, including editing the article, deleting the article, and posting comments. When users edit their own article, they are able to edit any section within the article apart from the tags.
 
--	Following another user:
+2.	**Unregistered Users**
 
-    - Prerequisite (choose either option 1 or option 2):
+    Conversely, non-registered users are limited to passive viewing of articles without the ability to interact or post comments, however, they can attempt to follow the author and favourite the article. Non-registered users are able to click on the user profile from the articles to view the user profile.    
 
-        - Option 1: Navigate to another user's profile by clicking on their username.
+### 3.1.2.4	Sign In
 
-        - Option 2: Navigate to the article page of another user by clicking on its ‘Read more…’ link.
+1.	**Registered Users**
 
-    -	The registered user SHOULD be able to follow the other user by clicking the '+ Follow <other username>' button next to the other user's profile picture.
+    During the sign-in process, registered users are provided seamless access to their accounts upon providing valid credentials. 
 
-    -	The articles of any followed users SHOULD be displayed within the ‘Your Feed’ section.
+2.	**Unregistered Users**
 
-    -	Unfollowing another user SHOULD cause their articles to disappear from the ‘Your Feed’ section.
+    On the other hand, non-registered users are appropriately restricted from accessing account features and functionalities, requiring them to sign up for an account to access the platform fully.  
 
--	Commenting:
+### 3.1.2.5	Sign Up
 
-    -	Once a registered user has clicked on the ‘Read more…’ link of an article, they SHOULD be shown the comment field.
+* The ‘Sign Up’ page should display the following fields: ‘Username’, ‘Email’ and ‘Password’.
 
-    -	The registered user SHOULD be able to write a comment and post it.
+1.	**Registered Users**
 
-    -	The registered user’s comment SHOULD appear below the comment field.
+    If a registered user tries to sign up using either a username or email that is already registered, a message should appear that states the ‘user already exists’.
 
-    - The registered user SHOULD be able to delete their own comment.
+2.	**Unregistered Users**
 
-    -	The registered user SHOULD NOT be able to delete other users' comments.
+    An unregistered user should be able to sign up, granted that they provide the following:
 
-•	Article Creation:
+    * A username that doesn’t already exist.
+    * A valid email address consists of an email prefix and an email domain. The prefix appears to the left of the @ symbol. The domain appears to the right of the @ symbol. 
+    * A password consisting of at least 8 characters.
 
-- 	Once the registered user clicks the 'New Article' button, the following fields SHOULD appear: article title, description, body and tags.
+### 3.1.2.6	Your Feed
 
--	The registered user SHOULD be able to publish an article once they have provided valid input data to the article title, description, and body. Tags are NOT mandatory.
+* Once a user is logged in, the ‘Your Feed’ section should display previews of articles written by other users which they are following. Each preview should contain the username of the author, the profile picture of the author, the date of publication, the title of the article, the description of the article, a ‘Read more…’ link, an enabled love heart button, as well as any tags relating to that article.
 
--	An error message SHOULD display if the input within the article title, description or body is not at least 1 character(s) long.
+1.	**Registered Users**
 
--	To include a tag, the user SHOULD write it in the textbox and then press ‘Enter’.
+    A registered should be able to view the profile of another user by clicking on their username. Furthermore, by clicking on the ‘Read more…’ more within a preview, they should be redirected onto a page that lets them view the entire article. In addition to this, they should be able to favourite an article by clicking on the love heart icon adjacent to it. The counter within this icon should also be incremented by 1.
 
--	The published article SHOULD appear within the 'Global Feed' and the 'My Articles' section of their user profile.
+2.	**Unregistered Users**
 
--	If the tag added to the published article is unique, it SHOULD appear at the end of the ‘Popular Tags’ column.
+    This option should not be available for unregistered users.
 
-•	Settings: 
+### 3.1.2.7	New Article
 
--	Once the registered user has clicked on the ‘Settings’ button, the following fields SHOULD appear: the URL of the profile picture, username, bio, email, and new password.
+* The ‘New Article’ page should display the following fields: ‘Article Title’, ‘What’s this article about?’ (description),  ‘Write your article (in markdown)’ (body) and ‘Enter tags’ (tags)
 
--	An error message SHOULD display if the username or email fields don’t contain at least one character(s).
+1.	**Registered Users**
 
--	The registered user SHOULD be able to update the URL of their profile picture, resulting in the new image icon displaying accordingly.
+    A registered user should be able to publish an article, granted that the input within the article title, description and body is 1 character(s) long. If they try to publish an article without these fields filled in, then an error message should display. Whilst tags are not mandatory, a registered user can include a tag by writing it within the textbox and pressing ‘Enter’. This in turn should cause the tag to appear below the textbox. 
+    
+    Once an article is published, it should appear within the 'Global Feed' and the 'My Articles' section of their user profile. In addition, if the registered user has added a tag which is unique, it should appear at the end of the ‘Popular Tags’ column.
 
--	The registered user SHOULD be able to update their username, with the change appearing within the ‘<profile username>’ navigation button.
+2.	**Unregistered Users**
 
--	The registered user SHOULD be able to update their bio.
+    This option should not be available for unregistered users.
 
--	The registered user SHOULD be able to update their email.
+### 3.1.2.8	Settings
 
--	The registered user SHOULD be able to update their password.
+* The Settings Page should display the title “Your Settings” along with the following fields: URL of the profile picture, username, bio, email, and new password, Update Settings and an option to Logout.
 
--	The registered user SHOULD be able to log out of their account by pressing the ‘Or click here to log out.’ button.
+1.	**Registered Users**
 
--	The registered user SHOULD be able to log in with the updated email and password.
+    If a registered user clicks on Settings, the page should display the title along with pre-filled user information in the following fields: URL of the profile picture, username and  email.  Appropriate error messages should be displayed when trying to update the fields.
 
--	The registered user SHOULD NOT be able to log in with old credentials.
 
-•	User Profile: 
+    | Fields                            | Error Message                                         |
+    | :-------------------------------- | :---------------------------------------------------- |
+    | Username is empty                 | Username: String must contain at least 1 character(s) |
+    | Already existing username / email | User already exists                                   |
+    | BIO is empty                      | Bio: String must contain at least 1 character(s)      |
+    | Email is empty                    | Email: Invalid email                                  |
+    
+    Once the user starts entering in the password field, an eye icon should appear. Clicking on it should make the password visible. After clicking the “Update Settings” button, the changes are updated and the user should not be able to login with old credentials. Also, the user should be able to log out of their account by pressing the ‘Or click here to log out.’ button.
 
--	The registered user SHOULD be able to see the articles that they have posted under the ‘My Articles’ section.
+2.	**Unregistered Users**
 
--	The registered user SHOULD be able to see the articles of other users which they have favourited within the 
-‘Favourited Articles’ section.
+    This option should not be available for unregistered users.
 
--	The registered user SHOULD be able to navigate to the Settings page by clicking the 'Edit Profile Settings' button.
+### 3.1.2.9	Profile Settings
 
--	The registered user SHOULD be able to favourite their own article (s).
+* The Profile Settings page should display elements like User Profile information, Edit Profile Settings, My Articles, and Favourited Articles.
 
--	Once the registered user has clicked on one of their own articles, they SHOULD be able to do the following:
+1.	**Registered Users**
 
--	Click the 'Edit Article' button and edit their article (except tags).
+    When a registered user clicks on Profile Settings, the page should prominently display essential elements such as User Profile information, Edit Profile Settings, My Articles, and Favourited Articles.
+    
+    The displayed information should include the User Profile picture, Username, Edit Profile Settings button, and bio (if available).
+    
+    Under the 'My Articles' section, the page should list all articles posted by the user, and under 'Favourited Articles,' it should showcase all articles favourited by the user. The user should have the option to favourite or unfavourite displayed articles.
+    
+    Clicking on an article from 'My Articles' should navigate to a page displaying the entire article and comments, with options to Edit Article, Delete Article, and post or delete comments. Editing an article does not allow the user to edit the tags.
+    
+    Clicking on an article from 'Favourited Articles' should display the complete article and its comments, along with the option to Follow the User, Add or delete comments, and Add or Remove Favourites. Users can navigate to the Settings page by clicking on the 'Edit Profile Settings' button.
 
--	Comment on their own article.
+2.	**Unregistered Users**
 
--	Delete their own comment.
+    This option should not be available for unregistered users.
 
--	Delete their article by clicking on the ‘Delete Article’ button.
+### 3.1.2.10	Author Profile
 
+1.	**Registered Users**
+
+    For registered users, upon visiting an author's profile, they are presented with the author's own articles and favourited articles, along with the ability to follow the author, favourite their articles, and explore tags associated with relevant articles.
+
+2.	**Unregistered Users**
+
+    Similarly, unregistered users, when viewing an author's profile, are shown the author's articles and favourited articles, and they too can follow the author, favourite their articles, and explore tags of pertinent articles.
 
 ## 3.2      Non-Functional Requirements
 
@@ -640,13 +592,6 @@ The website should be compatible with browsers like Safari, Microsoft Edge, Mozi
 
 -	The system must be user-friendly and focus on delivering a positive user experience. Consideration should be given to layout, colour schemes and interactive elements to enhance overall usability.
 
-
-
-
-
-
-
-
 ## Bugs
 
 The following bugs will be addressed during the development and testing phases:
@@ -657,11 +602,159 @@ The following bugs will be addressed during the development and testing phases:
 
 3.	The page number format becomes incorrect when navigating beyond pages and returning to the previous page. Specifically, an ellipsis (...) is displayed between the pages where a number should be, which should not occur.
 
- 
- 
- 
- 
- 
- 
+## To Do List
 
+- Split the document into different sections and save that as .md file 
+- Explore Swagger, Docusaurus
+- With the help of AI, convert Testcases into Playwright Test with Typescript
+- Ensure the information stated in the spreadsheet for the test cases is also found in the functional requirements document
+- ~~Compare our test cases with AI generated ones for every functionality and include the missing ones in the spreadsheet~~
+- ~~Include a navigation section~~
 
+## Writing Tests
+
+- The website <span style="color:green">SHOULD</span> provide user registration functionality for new users.
+  
+  <u>Unregistered users</u>
+
+- <span style="color:green">SHOULD</span> be shown a navigation bar containing the following buttons: ‘Conduit’, ‘Home’, ‘Sign In’ and ‘Sign Up’.
+
+- <span style="color:green">SHOULD</span> be able to navigate to the home page by clicking on the ‘Home’ button (within the navigation bar) or the brand button ‘Conduit’ (found within both the navigation bar and footer). 
+
+- <span style="color:green">SHOULD</span> be able to view article posts on separate pages by using the page counter.
+
+- <span style="color:green">SHOULD</span> be redirected to the ‘Thinkster’ website by clicking on the ‘Thinkster’ link within the footer. 
+
+- <span style="color:green">SHOULD</span> be shown in the 'Global Feed' section.
+
+- <span style="color:green">SHOULD</span> be able to view a registered user's profile page by clicking on their username within the ‘Global Feed’ section.
+
+- <span style="color:green">SHOULD</span> be able to read an entire article by clicking on the 'Read more…’ link.
+
+- <span style="color:green">SHOULD</span> have access to the ‘Popular Tags’ column and can filter articles by clicking on one of the tags.
+
+- <span style="color:green">SHOULD</span> be shown the username, email and password fields when navigating to the ‘Sign Up’ page.
+
+- <span style="color:green">SHOULD</span> be able to register on the ‘Sign Up’ page and be logged into their new account, granted that they provide: 
+  
+    - A username that doesn’t already exist.
+    - A valid email address consists of an email prefix and an email domain. The prefix appears to the left of the @ symbol. The domain appears to the right of the @ symbol. 
+    - A password consisting of at least 8 characters.
+
+- <span style="color:red">SHOULD NOT</span> be able to ‘like’ articles by clicking on the ‘heart’ icons. Doing so should redirect unregistered users to the ‘Sign Up’ page.
+
+- <span style="color:red">SHOULD NOT</span> be able to follow/unfollow a registered user.
+
+- <span style="color:red">SHOULD NOT</span> be able to comment on an article.
+
+<u>Registered users</u>
+
+- <span style="color:green">SHOULD</span> be shown a navigation bar containing the following buttons: ‘Conduit’, ‘Home’, ‘New Article’, ‘Settings’ and ‘<profile username>’.
+
+- <span style="color:green">SHOULD</span> be able to navigate to the home page by clicking on the 'Home' button (within the navigation bar) or the brand button 'Conduit' (found within both the navigation bar and footer). 
+
+- <span style="color:green">SHOULD</span> be able to view article posts on separate pages by using the page counter.
+
+- <span style="color:green">SHOULD</span> be redirected to the 'Thinkster' website by clicking on the 'Thinkster' link within the footer. 
+
+- <span style="color:green">SHOULD</span> be shown the ‘Your Feed’ and ‘Global Feed’ sections.
+
+- <span style="color:green">SHOULD</span> be able to view a registered user's profile page by clicking on their username.
+
+- <span style="color:green">SHOULD</span> be able to read an entire article by clicking on the 'Read more…' link.
+
+- <span style="color:green">SHOULD</span> have access to the 'Popular Tags' column, and can filter articles by clicking on one of the tags.
+
+- <span style="color:green">SHOULD</span> be able to ‘like’ articles by clicking on the ‘heart’ icons.
+
+- <span style="color:green">SHOULD</span> be able to follow/unfollow a registered user.
+
+- <span style="color:green">SHOULD</span> be able to publish a new article.
+
+- <span style="color:green">SHOULD</span> be able to edit and delete their own articles.
+
+- <span style="color:green">SHOULD</span> be able to comment on an article.
+
+- <span style="color:green">SHOULD</span> be able to update their profile settings.
+
+- <span style="color:green">SHOULD</span> be able to log out of their account.
+
+- <span style="color:red">SHOULD NOT</span> be able to edit or delete the articles of other users.
+
+#### 3.1.2.2	User Login:
+
+- <span style="color:green">SHOULD</span> be shown the username and password fields once on the ‘Sign In’ page.
+
+- <span style="color:green">SHOULD</span> log a user into the system once they have provided valid credentials.
+
+- <span style="color:green">SHOULD</span> display an error message if the user provides an invalid email address, a password that is not at least 8 characters long or a password that does not match one held by a registered user. 
+
+#### 3.1.2.3	User Interactions:
+
+- Home Page:
+  - Your Feed:
+   <span style="color:green">SHOULD</span> display the articles of the users that the current registered user is following.
+   
+- Global Feed:
+  <span style="color:green">SHOULD</span> display all the articles which have been published on the website.
+
+- Popular Tags: 
+    - Clicking on a tag within the ‘Popular Tags’ column <span style="color:green">SHOULD</span> cause another section called ‘#<selected tag>’ to appear next to the ‘Global Feed’.
+    - Only articles with the selected tag <span style="color:green">SHOULD</span> be displayed within the ‘#<selected tag>’ column.
+    - A user <span style="color:red">SHOULD NOT</span> be able to select multiple tags simultaneously.
+
+- Liking:
+    - The registered user <span style="color:green">SHOULD</span> be able to ‘like’ an article by clicking on the love heart adjacent to it, thus causing said article to be added to the ‘Favourited Articles’.
+  
+- Viewing the profile of other users:
+    - Once the registered user has clicked on another username, they <span style="color:green">SHOULD</span> be redirected to the latter’s profile page. 
+    - The latter user’s profile page <span style="color:green">SHOULD</span> display all articles published by said user.
+
+- Viewing the entire article of another user:
+   - Once the registered user has clicked on the ‘Read more…’ link of a particular article, they SHOULD be redirected to a page that fully displays the article.
+    
+- Following another user:
+   - Prerequisite (choose either option 1 or option 2):
+      * Option 1: Navigate to another user's profile by clicking on their username.
+      * Option 2: Navigate to the article page of another user by clicking on its ‘Read more…’ link.
+   - The registered user <span style="color:green">SHOULD</span> be able to follow the other user by clicking the '+ Follow <other username>' button next to the other user's profile picture.
+   - The articles of any followed users <span style="color:green">SHOULD</span> be displayed within the ‘Your Feed’ section.
+   - Unfollowing another user <span style="color:green">SHOULD</span> cause their articles to disappear from the ‘Your Feed’ section.
+
+- Commenting:
+   - Once a registered user has clicked on the ‘Read more…’ link of an article, they <span style="color:green">SHOULD</span> be shown the comment field.
+   - The registered user <span style="color:green">SHOULD</span> be able to write a comment and post it.
+   - The registered user’s comment <span style="color:green">SHOULD</span> appear below the comment field.
+   - The registered user <span style="color:green">SHOULD</span> be able to delete their own comment.
+   - The registered user <span style="color:green">SHOULD</span> NOT be able to delete other users' comments.
+
+- Article Creation:
+   - Once the registered user clicks the 'New Article' button, the following fields <span style="color:green">SHOULD</span> appear: article title, description, body and tags.
+   - The registered user <span style="color:green">SHOULD</span> be able to publish an article once they have provided valid input data to the article title, description, and body. Tags are NOT mandatory.
+   - An error message <span style="color:green">SHOULD</span> display if the input within the article title, description or body is not at least 1 character(s) long.
+   - To include a tag, the user <span style="color:green">SHOULD</span> write it in the textbox and then press ‘Enter’.
+   - The published article <span style="color:green">SHOULD</span> appear within the 'Global Feed' and the 'My Articles' section of their user profile.
+   - If the tag added to the published article is unique, it <span style="color:green">SHOULD</span> appear at the end of the ‘Popular Tags’ column.
+
+- Settings: 
+   - Once the registered user has clicked on the ‘Settings’ button, the following fields <span style="color:green">SHOULD</span> appear: the URL of the profile picture, username, bio, email, and new password.
+   - An error message <span style="color:green">SHOULD</span> display if the username or email fields don’t contain at least one character(s).
+   - The registered user <span style="color:green">SHOULD</span> be able to update the URL of their profile picture, resulting in the new image icon displaying accordingly.
+   - The registered user <span style="color:green">SHOULD</span> be able to update their username, with the change appearing within the ‘<profile username>’ navigation button.
+   - The registered user <span style="color:green">SHOULD</span> be able to update their bio.
+   - The registered user <span style="color:green">SHOULD</span> be able to update their email.
+   - The registered user <span style="color:green">SHOULD</span> be able to update their password.
+   - The registered user <span style="color:green">SHOULD</span> be able to log out of their account by pressing the ‘Or click here to log out.’ button.
+   - The registered user <span style="color:green">SHOULD</span> be able to log in with the updated email and password.
+   - The registered user <span style="color:red">SHOULD NOT</span> be able to log in with old credentials.
+
+- User Profile: 
+   - The registered user <span style="color:green">SHOULD</span> be able to see the articles that they have posted under the ‘My Articles’ section.
+   - The registered user <span style="color:green">SHOULD</span> be able to see the articles of other users which they have favourited within the ‘Favourited Articles’ section.
+   - The registered user <span style="color:green">SHOULD</span> be able to navigate to the Settings page by clicking the 'Edit Profile Settings' button.
+   - The registered user <span style="color:green">SHOULD</span> be able to favourite their own article (s).
+   - Once the registered user has clicked on one of their own articles, they <span style="color:green">SHOULD</span> be able to do the following:
+      * Click the 'Edit Article' button and edit their article (except tags).
+      * Comment on their own article.
+      * Delete their own comment.
+      * Delete their article by clicking on the ‘Delete Article’ button.
