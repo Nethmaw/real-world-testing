@@ -545,14 +545,14 @@ If a request fails any validations, expect a 422 and errors in the following for
     Upon clicking on Profile Settings, registered users will encounter the following features:
 
     ##### **Essential Elements Display**
-            The page prominently displays User Profile information, including the User Profile picture, Username, Edit Profile Settings button, and bio (if available).Also, users can navigate to the Settings page by clicking on the 'Edit Profile Settings' button.If there are no articles under My Articles or Favorited Articles, then a message stating "No articles are here... yet." will be shown.
+    * The page prominently displays User Profile information, including the User Profile picture, Username, Edit Profile Settings button, and bio (if available).Also, users can navigate to the Settings page by clicking on the 'Edit Profile Settings' button.If there are no articles under My Articles or Favorited Articles, then a message stating "No articles are here... yet." will be shown.
 
     ##### **My Articles Section**
-            Under the 'My Articles' section, the page lists all articles posted by the user organised with page numbers. Users have the ability to click on individual articles. Clicking on an article from 'My Articles' navigates to the Article page displaying the Username, Profile picture, Date of Publication, the entire article, and comments. Users can perform actions such as Edit Article, Delete Article, and post or delete comments. Editing an article does not allow the user to edit the tags.
+    * Under the 'My Articles' section, the page lists all articles posted by the user organised with page numbers. Users have the ability to click on individual articles. Clicking on an article from 'My Articles' navigates to the Article page displaying the Username, Profile picture, Date of Publication, the entire article, and comments. Users can perform actions such as Edit Article, Delete Article, and post or delete comments. Editing an article does not allow the user to edit the tags.
 
 
      ##### **Favourited Articles Section**
-            Under the 'Favorited Articles' section, the page showcases all articles favorited by the user organised with page numbers. Users have the option to favourite or unfavorite displayed articles.Clicking on an article from 'Favorited Articles' navigates to the Article page displaying the Username, Profile picture, Date of Publication, complete article, and its comments. Users have options to Follow the User, Add or delete comments, and Add or Remove Favorites.
+    * Under the 'Favorited Articles' section, the page showcases all articles favorited by the user organised with page numbers. Users have the option to favourite or unfavorite displayed articles.Clicking on an article from 'Favorited Articles' navigates to the Article page displaying the Username, Profile picture, Date of Publication, complete article, and its comments. Users have options to Follow the User, Add or delete comments, and Add or Remove Favorites.
 
 2.	**Unregistered Users**
 
