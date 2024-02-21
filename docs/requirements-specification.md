@@ -602,6 +602,8 @@ The following bugs will be addressed during the development and testing phases:
 
 3.	The page number format becomes incorrect when navigating beyond pages and returning to the previous page. Specifically, an ellipsis (...) is displayed between the pages where a number should be, which should not occur.
 
+4.  If  a registered user tries to hold the ‘Ctrl’ key and open multiple tabs with their own articles, it appears as if they are signed out.
+
 ## To Do List
 
 - Split the document into different sections and save that as .md file 
