@@ -1,0 +1,596 @@
+# **Software Requirements Specification: Conduit**
+
+## **Table of Contents:** 
+ 
+1. [Introduction](#introduction) 
+
+   [1.1 Purpose](#purpose)  
+
+   [1.2 Project Scope](#project-scope)  
+   
+   [1.3 Intended Audience and Reading Suggestions](#intended-audience-and-reading-suggestions)  
+   
+   [1.4 Architecture Diagram](#architecture-diagram)
+   
+2. [Overall Description](#overall-description)
+
+   [2.2 Product Perspective](#product-perspective)  
+   
+   [2.3 Product Features](#product-features)
+   
+   - [2.3.1 Non-Registered User Features](#non-registered-user-features)
+   
+   - [2.3.2 Registered User Features](#registered-user-features)
+   
+   - [2.3.3 Unified Platform Characteristics](#unified-platform-characteristics)
+
+3. [System Features](#system-features)
+
+    [3.1 Functional Requirements](#functional-requirements)
+    
+    - [3.1.1 API](#api)
+
+     - [3.1.2 User Interface](#user-interface)
+
+       - [3.1.2.1 Homepage](#homepage)
+
+       - [3.1.2.2 Article](#article)
+
+       - [3.1.2.3 Sign In](#sign-in)
+
+       - [3.1.2.4 Sign Up](#sign-up)
+
+       - [3.1.2.5 Your Feed](#your-feed)
+
+       - [3.1.2.6 New Article](#new-article)
+
+       - [3.1.2.7 Settings](#settings)
+
+       - [3.1.2.8 Profile Settings](#profile-settings)
+
+       - [3.1.2.9 Author Profile](#author-profile)
+
+    [3.2 Non-Functional Requirements](#non-functional-requirements)
+
+     - [3.2.1 Security Requirements](#security-requirements)
+
+     - [3.2.2 Performance Requirements](#performance-requirements)
+
+     - [3.2.3 Compatibility Requirements](#compatibility-requirements)
+
+     - [3.2.4 Usability Requirements](#usability-requirements)
+
+       - [3.2.4.1 General Requirements](#general-requirements)
+
+       - [3.2.4.2 UX Design](#ux-design)
+
+
+4. [Bugs](#bugs)
+
+
+
+## **Introduction**   
+
+### **1.1        Purpose**   
+
+This document aims to establish an online platform where registered users can compose articles on various topics to be viewed by registered and non-registered users.   
+
+### **1.2        Project Scope**   
+
+The project entails building a dynamic website where registered users can create, submit, and showcase articles on diverse topics. Registered and non-registered users can easily browse and view articles, fostering a broad user base. The platform will emphasise user interactivity, featuring comments, likes, and social sharing options to encourage engagement and discussion.
+
+Ensuring a secure and rewarding user experience, the platform will feature robust user profiles, privacy safeguards, and compelling content moderation. The website will be exclusively accessible through web browsers, limiting its availability to desktop and laptop devices rather than mobile phones. The project will prioritise accessibility and compliance with regulations, ultimately creating a versatile and engaging content-sharing platform. 
+
+### **1.3        Intended Audience and Reading Suggestion**  
+
+The intended audience would include a broad spectrum of individuals interested in diverse topics, ranging from content creators, enthusiasts, and knowledge seekers to casual readers. 
+The reading suggestions for a diverse audience encompass a wide array of subjects. Recommendations might include informative articles, creative pieces, and engaging content spanning various interests such as technology, arts, science, lifestyle, and more. This guarantees an enticing experience for every individual across our diverse user base. 
+
+### **1.4        Architecture Diagram**   
+
+![Figure 1](/architectureDiagram.png)
+
+***Figure 1.*** *Architecture Diagram illustrating the flow of client requests through a load balancer, reaching the UI layer, then being processed by web and application servers.*
+
+In this architecture diagram, users interact with a website to create and publish articles. The process begins with the user (client) accessing the website's interface. Their requests are directed to a load balancer, which evenly distributes traffic across multiple servers to ensure reliability and scalability. The user interface (UI) component handles the presentation layer, providing the interface for users to input and submit articles. 
+
+Behind the scenes, a combination of web servers and application servers processes these requests: the web server serves static content like HTML and CSS, while the application server executes dynamic logic such as article submission and database interactions. Together, these components form a robust system for users to create and publish articles on the website seamlessly.
+
+
+## **Overall Description**  
+
+### **2.2    Product Perspective**  
+
+The Conduit Article Website is a comprehensive platform tailored for registered and non-registered users, providing an inclusive space for content exploration and contribution. 
+
+### **2.3    Product Features**  
+
+#### 2.3.1 Non-Registered User Features: 
+
+-	Global Feed Access: 
+
+Immediate exposure to a diverse array of published articles. 
+
+- 	Tag-Based Article Filtering: 
+
+Enhanced browsing experience through relevant tag filters aligning with user interests. 
+
+#### 2.3.2 Registered User Features: 
+
+- 	Personalised Feed: 
+
+Access to favourite articles and publications from followed authors under the “Your Feed” section, tailoring the content consumption journey. 
+
+-	Article Contribution: 
+
+    i.	Ability to publish articles under the "New Articles" section, fostering user engagement. 
+
+    ii.	Inclusion of relevant tags during article creation for optimised discoverability. 
+
+-	User Control and Personalisation: 
+
+    i.	Settings Section: Effortless management and update of personal details for a tailored and secure user experience. 
+
+    ii.	Profile Section: A centralised hub showcasing both authored and favourited articles, empowering users to shape their digital identity. 
+
+#### 2.3.3 Unified Platform Characteristics: 
+
+-	Inclusivity: 
+
+A platform designed for both registered and non-registered users, ensuring an inclusive content-sharing environment. 
+
+-	Community Engagement: 
+
+    i.	Features encouraging user interaction, such as liking, commenting, and sharing articles. 
+
+    ii.	Notifications to keep registered users informed about interactions with their articles. 
+
+## **System Features**
+
+### **3.1	      Functional Requirements**
+
+Functional requirements are specifications that describe the functions and features the 'Conduit' website must have to meet its intended purpose and the needs of its users. These requirements outline the specific behaviours and capabilities the website must possess to perform its functions effectively. Overall, these requirements describe what the website is supposed to do and how it can be used by the users accessing it.
+
+**3.1.1    API**
+
+The API provides functionality for creating, retrieving, updating and deleting articles and comments. It also supports user authentication, profile management and interaction between users.
+
+### Endpoints
+
+#### Authentication Header: 
+
+You can read the authentication header from the headers of the request.
+
+Authorization: `Token <token string>`
+
+#### <u>Registration</u>
+
+| Method | URL                       |
+|--------|---------------------------|
+| POST   | localhost:3000/api/users/ |  
+
+
+
+Example request body:  
+
+    {
+        "user":{
+        "username": "Jacob",
+        "email": "jake@jake.jake",
+        "password": "jakejake"
+      }
+    }
+Required fields:  email, username, password  
+
+No authentication required – returns a User
+
+#### <u>Authentication</u>
+
+| Method | URL                       |
+|--------|---------------------------|
+| POST   | localhost:3000/api/users/login |  
+
+Example request body:  
+
+    {
+        "user":{
+        "email": "jake@jake.jake",
+        "password": "jakejake"
+      }
+    }
+Required fields:  email, password  
+
+No authentication required – returns a User
+
+#### <u>Get Current User</u>
+| Method | URL                       |
+|--------|---------------------------|
+| GET    | localhost:3000/api/user/ |  
+
+Authentication required – returns a User that's the current user
+
+#### <u>Update User</u>
+| Method | URL                       |
+|--------|---------------------------|
+| PUT    | localhost:3000/api/user/ | 
+
+Example request body:
+
+    {
+        "user":{
+        "email": "jake@jake.jake",
+        "bio": "I like to skateboard",
+        "image": "https://i.stack.imgur.com/xHWG8.jpg"
+      }
+    }
+
+Accepted fields: email, username, password, image, bio  
+
+Authentication required – returns the User
+
+#### <u>Get Profile</u>
+| Method | URL                       |
+|--------|---------------------------|
+| GET  | localhost:3000/api/profiles/:username |   
+
+Authentication optional –  returns a  Profile
+
+#### <u>Follow user</u> 
+| Method | URL                       |
+|--------|---------------------------|
+| POST  | localhost:3000/api/profiles/:username/follow |   
+
+Authentication required – returns a  Profile  
+
+No additional parameters required
+
+#### <u>Unfollow user</u> 
+| Method | URL                       |
+|--------|---------------------------|
+| DELETE | localhost:3000/api/profiles/:username/follow |   
+
+Authentication required – returns a  Profile  
+
+No additional parameters required
+
+#### <u>List Articles</u> 
+| Method | URL                       |
+|--------|---------------------------|
+| GET  | localhost:3000/api/articles |   
+
+Returns most recent articles globally by default  
+
+Fields: Tag, author or favourited query parameter to filter results
+
+#### <u>Query Parameters</u>
+Filter by tag:  
+
+?tag=AngularJS  
+
+Filter by author:  
+
+?author=jake  
+
+Favourited by user:  
+
+?favorited=jake  
+
+Authentication optional – will return multiple articles, ordered by the most recent first
+
+#### <u>Feed Articles</u> 
+| Method | URL                       |
+|--------|---------------------------|
+| GET  | localhost:3000/api/articles/feed |    
+
+Authentication required – will return multiple articles created by followed users, ordered by the most recent first.
+
+#### <u>Get Article</u> 
+| Method | URL                       |
+|--------|---------------------------|
+| GET  | localhost:3000/api/articles/:slug |    
+
+No authentication required – will return single article
+
+#### <u>Create Article</u> 
+| Method | URL                       |
+|--------|---------------------------|
+| POST | localhost:3000/api/articles/ |    
+
+Example request body:  
+
+      {
+          "article": {
+          "title": "How to train your dragon",
+          "description": "Ever wonder how?",
+          "body": "You have to believe",
+          "tagList": ["reactjs", "angularjs", "dragons"]
+        }
+      }
+
+Authentication required – will return an Article  
+
+Required fields: title, description, body  
+
+Optional fields: tagList as an array of Strings
+
+#### <u>Update Article</u> 
+| Method | URL                       |
+|--------|---------------------------|
+| PUT | localhost:3000/api/articles/:slug |    
+
+Example request body:  
+
+    {
+          "article": {
+          "title": "Did you train your dragon?"
+      }
+    }
+
+Authentication required – returns the updated Article  
+
+Optional fields: title, description, body  
+
+The slug also gets updated when the title is changed.  
+
+
+#### <u>Delete Article</u> 
+| Method | URL                       |
+|--------|---------------------------|
+| DELETE  | localhost:3000/api/articles/:slug |    
+
+Authentication required
+
+#### <u>Add Comments to an Article</u> 
+| Method | URL                       |
+|--------|---------------------------|
+| POST  | localhost:3000/api/articles/:slug/comments |   
+
+Example request body:  
+
+    {
+         "comment": {
+         "body": "His name was my name too."
+     }
+    }
+
+Authentication required – returns the created Comment  
+
+Required field: body
+
+#### <u>Get Comments from an Article</u> 
+| Method | URL                       |
+|--------|---------------------------|
+| GET  |localhost:3000/api/articles/:slug/comments |   
+
+Authentication optional – returns multiple comments
+
+#### <u>Delete Comment</u> 
+| Method | URL                       |
+|--------|---------------------------|
+| DELETE  | localhost:3000/api/articles/:slug/comments/:id |  
+
+Authentication required
+
+#### <u>Favourite Article</u> 
+| Method | URL                       |
+|--------|---------------------------|
+| POST  |localhost:3000/api/articles/:slug/favorite |    
+
+Authentication required –  returns the Article  
+
+No additional parameters required
+
+#### <u>Unfavourite Article</u> 
+| Method | URL                       |
+|--------|---------------------------|
+| DELETE  | localhost:3000/api/articles/:slug/favorite |    
+
+Authentication required – returns the Article  
+
+No additional parameters required
+
+#### <u>Get Tags</u> 
+| Method | URL                       |
+|--------|---------------------------|
+| GET  | localhost:3000/api/tags |    
+
+No authentication required – returns a List of Tags
+
+### Error Handling  
+
+Errors and Status Codes   
+
+If a request fails any validations, expect a 422 and errors in the following format:  
+
+     {
+         "errors":{
+          "body": [
+          "can't be empty"
+        ]
+       }
+     }
+  
+
+### Other Status Codes:   
+
+**401 for Unauthorised Requests**  - When a request requires authentication but is not provided.  
+
+**403 for Forbidden requests**  - When a request may be valid, but the user does not have permission to perform the action.  
+
+**404 for Not found requests**  - When a resource cannot be found to fulfil the request.
+
+## 3.1.2    User Interface
+
+### 3.1.2.1	Homepage
+
+- When both registered and non-registered users navigate the homepage, they can browse all articles in the global feed, where clicking on the ‘read more’ link on an article allows users to read the full article. Users of both registered and non-registered can click on author names in the Global Feed to view their profiles and can filter articles by clicking on tags in the popular tags section. They also can favourite articles directly on the global feed page and view more articles from clicking on the navigation page number underneath the list of articles. 
+  
+  1.	**Registered Users**
+  
+  Registered users have the option of clicking your feed to view articles from users they follow, and have the option to access their settings, profile, home, and new article from the navigation pane.
+  
+  2.	**Unregistered Users**
+  
+  Unregistered users, however, have the option of signing in, signing up and viewing the homepage.
+
+### 3.1.2.2 Article
+
+   1. **Registered Users**
+   
+   In the article section, registered users possess the capability to not only view articles authored by other users but also to engage with them by posting comments, favouriting articles, following other users, and navigating to the users' profile by clicking on the user’s profile link. They are empowered to manage their own articles, including editing the article, deleting the article, and posting comments. When users edit their own article, they are able to edit any section within the article apart from the tags.
+
+   2. **Unregistered Users**
+   
+   Conversely, non-registered users are limited to passive viewing of articles without the ability to interact or post comments, however, they can attempt to follow the author and favourite the article. Non-registered users are able to click on the user profile from the articles to view the user profile.    
+  
+### 3.1.2.3	Sign In
+
+   1. **Registered Users**
+
+During the sign-in process, registered users are provided seamless access to their accounts upon providing valid credentials. 
+
+   2. **Unregistered Users**
+
+On the other hand, non-registered users are appropriately restricted from accessing account features and functionalities, requiring them to sign up for an account to access the platform fully.  
+ 
+
+### 3.1.2.4	Sign Up
+
+- The ‘Sign Up’ page should display the following fields: ‘Username’, ‘Email’ and ‘Password’.
+  
+  1.	**Registered Users**
+
+  If a registered user tries to sign up using either a username or email that is already registered, a message should appear that states the ‘user already exists’.
+
+  2.	**Unregistered Users**
+
+  An unregistered user should be able to sign up, granted that they provide the following:
+  - A username that doesn’t already exist.
+  - A valid email address consists of an email prefix and an email domain. The prefix appears to the left of the @ symbol. The domain appears to the right of the @ symbol. 
+  - A password consisting of at least 8 characters.
+
+### 3.1.2.5	Your Feed
+
+- Once a user is logged in, the ‘Your Feed’ section should display previews of articles written by other users which they are following. Each preview should contain the username of the author, the profile picture of the author, the date of publication, the title of the article, the description of the article, a ‘Read more…’ link, an enabled love heart button, as well as any tags relating to that article.
+  
+  1. **Registered Users**
+   
+   A registered should be able to view the profile of another user by clicking on their username. Furthermore, by clicking on the ‘Read more…’ more within a preview, they should be redirected onto a page that lets them view the entire article. In addition to this, they should be able to favourite an article by clicking on the love heart icon adjacent to it. The counter within this icon should also be incremented by 1.
+   
+   2.	**Unregistered Users**
+   
+   This option should not be available for unregistered users.
+
+### 3.1.2.6	New Article
+
+- The ‘New Article’ page should display the following fields: ‘Article Title’, ‘What’s this article about?’ (description),  ‘Write your article (in markdown)’ (body) and ‘Enter tags’ (tags)
+  
+  1.	**Registered Users**
+  
+  A registered user should be able to publish an article, granted that the input within the article title, description and body is 1 character(s) long. If they try to publish an article without these fields filled in, then an error message should display. Whilst tags are not mandatory, a registered user can include a tag by writing it within the textbox and pressing ‘Enter’. This in turn should cause the tag to appear below the textbox. 
+  
+  Once an article is published, it should appear within the 'Global Feed' and the 'My Articles' section of their user profile. In addition, if the registered user has added a tag which is unique, it should appear at the end of the ‘Popular Tags’ column.
+  
+  2.	**Unregistered Users**
+  
+  This option should not be available for unregistered users.
+
+### 3.1.2.7	Settings
+
+- The Settings Page should display the title “Your Settings” along with the following fields: URL of the profile picture, username, bio, email, and new password, Update Settings and an option to Logout.
+  
+  1.	**Registered Users**
+  
+  If a registered user clicks on Settings, the page should display the title along with pre-filled user information in the following fields: URL of the profile picture, username and  email.  Appropriate error messages should be displayed when trying to update the fields.
+
+  
+  | Fields                            | Error Message                                         |
+  | :-------------------------------- | :---------------------------------------------------- |
+  | Username is empty                 | Username: String must contain at least 1 character(s) |
+  | Already existing username / email | User already exists                                   |
+  | BIO is empty                      | Bio: String must contain at least 1 character(s)      |
+  | Email is empty                    | Email: Invalid email                                  |
+  
+ 
+  Once the user starts entering in the password field, an eye icon should appear. Clicking on it should make the password visible. After clicking the “Update Settings” button, the changes are updated and the user should not be able to login with old credentials. Also, the user should be able to log out of their account by pressing the ‘Or click here to log out.’ button.
+
+
+  2.	**Unregistered Users**
+  
+  This option should not be available for unregistered users.
+
+### 3.1.2.8	Profile Settings
+
+- The Profile Settings page should display elements like User Profile information, Edit Profile Settings, My Articles, and Favourited Articles.
+  
+  1.	**Registered Users**
+  
+  When a registered user clicks on Profile Settings, the page should prominently display essential elements such as User Profile information, Edit Profile Settings, My Articles, and Favourited Articles.
+  
+  The displayed information should include the User Profile picture, Username, Edit Profile Settings button, and bio (if available).
+  
+  Under the 'My Articles' section, the page should list all articles posted by the user, and under 'Favourited Articles,' it should showcase all articles favourited by the user. The user should have the option to favourite or unfavourite displayed articles.
+  
+  Clicking on an article from 'My Articles' should navigate to a page displaying the entire article and comments, with options to Edit Article, Delete Article, and post or delete comments. Editing an article does not allow the user to edit the tags.
+  
+  Clicking on an article from 'Favourited Articles' should display the complete article and its comments, along with the option to Follow the User, Add or delete comments, and Add or Remove Favourites. Users can navigate to the Settings page by clicking on the 'Edit Profile Settings' button.
+  
+  2.	**Unregistered Users**
+  
+  This option should not be available for unregistered users.
+
+### 3.1.2.9	Author Profile
+
+  1.	**Registered Users**
+
+  For registered users, upon visiting an author's profile, they are presented with the author's own articles and favourited articles, along with the ability to follow the author, favourite their articles, and explore tags associated with relevant articles.
+
+  2.	**Unregistered Users**
+
+  Similarly, unregistered users, when viewing an author's profile, are shown the author's articles and favourited articles, and they too can follow the author, favourite their articles, and explore tags of pertinent articles.
+
+## 3.2      Non-Functional Requirements
+
+Non-functional requirements are critical specifications that focus on the overall performance, security, and user experience of the 'Conduit' website. This includes aspects beyond specific functionalities and establishing security, performance, compatibility, and usability standards.
+	
+### 3.2.1    Security Requirements
+
+User authentication should be implemented securely to ensure user credentials are protected. 
+
+### 3.2.2    Performance Requirements
+
+ Out of scope
+
+### 3.2.3    Compatibility Requirements
+
+The website should be compatible with browsers like Safari, Microsoft Edge, Mozilla Firefox, etc. Users should be able to access and use the application seamlessly across different browsers.
+
+## 3.2.4    Usability Requirements
+
+### 3.2.4.1 General Requirements:
+
+-	The system must meet general usability standards like straightforward navigation, responsive design, and consistent user interface elements to ensure an intuitive and efficient user experience.
+
+### 3.2.4.2	UX Design:
+
+-	The system must be user-friendly and focus on delivering a positive user experience. Consideration should be given to layout, colour schemes and interactive elements to enhance overall usability.
+
+
+## Bugs
+
+The following bugs will be addressed during the development and testing phases:
+
+1.	By default, non-registered users are automatically following all registered users. 
+
+2.	Once tags are created, registered users cannot edit them. 
+
+3.	The page number format becomes incorrect when navigating beyond pages and returning to the previous page. Specifically, an ellipsis (...) is displayed between the pages where a number should be, which should not occur.
+
+ 
+ 
+ 
+ 
+ 
+ 
+
+
