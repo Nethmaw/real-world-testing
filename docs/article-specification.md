@@ -7,4 +7,3 @@
    1. **Unregistered Users**
 
       Conversely, non-registered users are limited to passive viewing of articles without the ability to interact or post comments, however, they can attempt to follow the author and favourite the article. Non-registered users are able to click on the user profile from the articles to view the user profile.
-  

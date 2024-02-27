@@ -1,4 +1,3 @@
-  
 # Sign In
 
 1. **Registered Users**

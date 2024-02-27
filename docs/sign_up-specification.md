@@ -1,4 +1,4 @@
-## Sign Up
+# Sign Up
 
 - The ‘Sign Up’ page should display the following fields: ‘Username’, ‘Email’ and ‘Password’.
 
@@ -10,6 +10,6 @@
 
       An unregistered user should be able to sign up, granted that they provide the following:
 
-      * A username that doesn’t already exist.
-      * A valid email address consists of an email prefix and an email domain. The prefix appears to the left of the @ symbol. The domain appears to the right of the @ symbol.
-      * A password consisting of at least 8 characters. 
+      - A username that doesn’t already exist.
+      - A valid email address consists of an email prefix and an email domain. The prefix appears to the left of the @ symbol. The domain appears to the right of the @ symbol.
+      - A password consisting of at least 8 characters.

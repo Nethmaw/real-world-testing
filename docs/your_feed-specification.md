@@ -1,4 +1,4 @@
-## Your Feed
+# Your Feed
 
 - Once a user is logged in, the ‘Your Feed’ section should display previews of articles written by other users which they are following. Each preview should contain the username of the author, the profile picture of the author, the date of publication, the title of the article, the description of the article, a ‘Read more…’ link, an enabled love heart button, as well as any tags relating to that article.
 

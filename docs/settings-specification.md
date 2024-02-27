@@ -1,4 +1,4 @@
-### Settings
+# Settings
 
 - The Settings Page should display the title “Your Settings” along with the following fields: URL of the profile picture, username, bio, email, and new password, Update Settings and an option to Logout. Additionally, the page includes navigation header items like Conduit, Home, New Article, Settings, Profile, and a footer containing Thinkster and Conduit link.
   
@@ -16,7 +16,6 @@
             
  
         Once the user starts entering in the password field, an eye icon should appear. Clicking on it should make the password visible. After clicking the “Update Settings” button, the changes are updated and the user should not be able to login with old credentials. Also, the user should be able to log out of their account by pressing the ‘Or click here to log out.’ button.
-
 
     ii. **Unregistered Users**
   
