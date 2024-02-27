@@ -1,30 +1,21 @@
 # **Software Requirements Specification: Conduit**
 
-## **Table of Contents:** 
- 
-1.	Introduction  
+## **Table of Contents:**
 
-    1.1	Purpose  
+1. [Introduction](#introduction)
+    1. [Purpose](#11-purpose)
+    1. [Project Scope](#12-project-scope)
+    1. Intended Audience and Reading Suggestions
+    1. Architecture Diagram
 
-    1.2	       Project Scope  
+2. Overall Description
+    1. Product Perspective
+    1. Product Features
+        1. Non-Registered User Features
+        1. Registered User Features  
+        1. Unified Platform Characteristics  
 
-    1.3	Intended Audience and Reading Suggestions   
-
-    1.4 	Architecture Diagram  
- 
-2. Overall Description  
-
-    2.2 Product Perspective  
-
-    2.3 Product Features  
-
-   - 2.3.1 Non-Registered User Features  
-
-    - 2.3.2 Registered User Features  
-
-    - 2.3.3	Unified Platform Characteristics  
- 
-3.	System Features  
+3. System Features  
 
     3.1	      Functional Requirements  
 
@@ -66,19 +57,15 @@
 
 		- 3.2.4.2 UX Design  
 
+4. Bugs
 
- 
-4.	Bugs 
+## **Introduction**
 
+## **1.1 Purpose**
 
+This document aims to establish an online platform where registered users can compose articles on various topics to be viewed by registered and non-registered users.
 
-## **Introduction**   
-
-## **1.1        Purpose**   
-
-This document aims to establish an online platform where registered users can compose articles on various topics to be viewed by registered and non-registered users.   
-
-## **1.2        Project Scope**   
+## **1.2 Project Scope**
 
 The project entails building a dynamic website where registered users can create, submit, and showcase articles on diverse topics. Registered and non-registered users can easily browse and view articles, fostering a broad user base. The platform will emphasise user interactivity, featuring comments, likes, and social sharing options to encourage engagement and discussion.
 
