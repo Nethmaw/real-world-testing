@@ -72,13 +72,13 @@ const config = {
             position: 'left',
             label: 'Docs',
           },
-          // {
-          //   type: 'docSidebar',
-          //   sidebarId: 'tutorialSidebar',
-          //   position: 'left',
-          //   label: 'API',
-          // },
-          {to: '/API', label: 'API', position: 'left'},
+          {
+            type: 'docSidebar',
+            position: 'left',
+            sidebarId: 'api',
+            label: 'API',
+          },
+          //{to: '/api', label: 'API', position: 'left', activeBaseRegex: `/api/`,},
           {
             href: 'https://github.com/SaraGitTest/real-world-testing',
             label: 'GitHub',

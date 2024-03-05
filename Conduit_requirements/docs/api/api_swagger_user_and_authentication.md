@@ -1,4 +1,9 @@
-<!-- ## User and Authentication
+---
+sidebar_position: 1
+---
+<!-- # Swagger User Authentication
+
+## User and Authentication
 
 <details>
 
@@ -143,7 +148,7 @@ http://localhost:3000/api/users/login
             <td><b><h5>Response Body</h5></b></td>
         </tr>
         <tr>
-            <td rowspan=1>
+            <td rowspan="1">
             {
                 <br>
                 &nbsp;&nbsp; &nbsp; &nbsp; "user":

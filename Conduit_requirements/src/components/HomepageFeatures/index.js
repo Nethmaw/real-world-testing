@@ -11,11 +11,14 @@ const FeatureList = [
         Welcome to the official documentation for Conduit – a platform that empowers users to create and share articles seamlessly. 
         Whether you're a developer integrating Conduit into your project or a user exploring its features, this documentation is your comprehensive guide.
       </>
+      
     ),
   },
   
   
 ];
+  
+
 
 function Feature({ Svg, title, description }) {
   return (
@@ -26,6 +29,7 @@ function Feature({ Svg, title, description }) {
       <div className="text--center padding-horiz--md">
         <Heading as="h3">{title}</Heading>
         <p>{description}</p>
+        <a href="http://localhost:3000/" target="_blank" rel="noopener noreferrer" class="button button--primary button--lg">discover our demo</a>
       </div>
     </div>
   );
