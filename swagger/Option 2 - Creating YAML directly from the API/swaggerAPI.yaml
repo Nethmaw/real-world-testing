@@ -1,0 +1,1437 @@
+openapi: 3.0.3
+info:
+  title: Example CRUD API
+  description: OpenAPI compliant REST API built using tRPC with Next.js
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000/api
+paths:
+  /articles/feed:
+    get:
+      operationId: articles-getArticleFeed
+      summary: Get recent articles from users you follow
+      description: Get most recent articles from users you follow. Use query parameters to limit. Auth is required
+      tags:
+        - Articles
+      security:
+        - Authorization: []
+      parameters:
+        - name: offset
+          in: query
+          required: false
+          schema:
+            type: number
+        - name: limit
+          in: query
+          required: false
+          schema:
+            anyOf:
+              - not: {}
+              - type: number
+            default: 5
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  articles:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        slug:
+                          type: string
+                          minLength: 1
+                        title:
+                          type: string
+                          minLength: 1
+                        description:
+                          type: string
+                          minLength: 1
+                        body:
+                          type: string
+                          minLength: 1
+                        tagList:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              value:
+                                type: string
+                            required:
+                              - value
+                            additionalProperties: false
+                          nullable: true
+                        createdAt:
+                          type: string
+                          format: date-time
+                        updatedAt:
+                          type: string
+                          format: date-time
+                        favorited:
+                          type: boolean
+                        favoritesCount:
+                          type: number
+                        author:
+                          type: object
+                          properties:
+                            username:
+                              type: string
+                              minLength: 1
+                            bio:
+                              type: string
+                              nullable: true
+                            image:
+                              type: string
+                              format: uri
+                              nullable: true
+                            following:
+                              type: boolean
+                              default: false
+                          required:
+                            - username
+                          additionalProperties: false
+                      required:
+                        - slug
+                        - title
+                        - description
+                        - body
+                        - createdAt
+                        - updatedAt
+                        - favorited
+                        - favoritesCount
+                        - author
+                      additionalProperties: false
+                  articlesCount:
+                    type: number
+                required:
+                  - articles
+                  - articlesCount
+                additionalProperties: false
+        default:
+          $ref: '#/components/responses/error'
+  /articles:
+    get:
+      operationId: articles-getArticles
+      summary: Get recent articles globally
+      description: Get most recent articles globally. Use query parameters to filter results. Auth is optional
+      tags:
+        - Articles
+      parameters:
+        - name: offset
+          in: query
+          required: false
+          schema:
+            type: number
+        - name: limit
+          in: query
+          required: false
+          schema:
+            anyOf:
+              - not: {}
+              - type: number
+            default: 5
+        - name: tag
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: author
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: favorited
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  articles:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        slug:
+                          type: string
+                          minLength: 1
+                        title:
+                          type: string
+                          minLength: 1
+                        description:
+                          type: string
+                          minLength: 1
+                        body:
+                          type: string
+                          minLength: 1
+                        tagList:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              value:
+                                type: string
+                            required:
+                              - value
+                            additionalProperties: false
+                          nullable: true
+                        createdAt:
+                          type: string
+                          format: date-time
+                        updatedAt:
+                          type: string
+                          format: date-time
+                        favorited:
+                          type: boolean
+                        favoritesCount:
+                          type: number
+                        author:
+                          type: object
+                          properties:
+                            username:
+                              type: string
+                              minLength: 1
+                            bio:
+                              type: string
+                              nullable: true
+                            image:
+                              type: string
+                              format: uri
+                              nullable: true
+                            following:
+                              type: boolean
+                              default: false
+                          required:
+                            - username
+                          additionalProperties: false
+                      required:
+                        - slug
+                        - title
+                        - description
+                        - body
+                        - createdAt
+                        - updatedAt
+                        - favorited
+                        - favoritesCount
+                        - author
+                      additionalProperties: false
+                  articlesCount:
+                    type: number
+                required:
+                  - articles
+                  - articlesCount
+                additionalProperties: false
+        default:
+          $ref: '#/components/responses/error'
+    post:
+      operationId: articles-createArticle
+      summary: Create an article
+      description: Create an article. Auth is required
+      tags:
+        - Articles
+      security:
+        - Authorization: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                article:
+                  type: object
+                  properties:
+                    title:
+                      type: string
+                      minLength: 1
+                    description:
+                      type: string
+                      minLength: 1
+                    body:
+                      type: string
+                      minLength: 1
+                    tagList:
+                      type: array
+                      items:
+                        type: string
+                  required:
+                    - title
+                    - description
+                    - body
+                    - tagList
+                  additionalProperties: false
+              required:
+                - article
+              additionalProperties: false
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  article:
+                    type: object
+                    properties:
+                      slug:
+                        type: string
+                        minLength: 1
+                      title:
+                        type: string
+                        minLength: 1
+                      description:
+                        type: string
+                        minLength: 1
+                      body:
+                        type: string
+                        minLength: 1
+                      tagList:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            value:
+                              type: string
+                          required:
+                            - value
+                          additionalProperties: false
+                        nullable: true
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
+                      favorited:
+                        type: boolean
+                      favoritesCount:
+                        type: number
+                      author:
+                        type: object
+                        properties:
+                          username:
+                            type: string
+                            minLength: 1
+                          bio:
+                            type: string
+                            nullable: true
+                          image:
+                            type: string
+                            format: uri
+                            nullable: true
+                          following:
+                            type: boolean
+                            default: false
+                        required:
+                          - username
+                        additionalProperties: false
+                    required:
+                      - slug
+                      - title
+                      - description
+                      - body
+                      - createdAt
+                      - updatedAt
+                      - favorited
+                      - favoritesCount
+                      - author
+                    additionalProperties: false
+                required:
+                  - article
+                additionalProperties: false
+        default:
+          $ref: '#/components/responses/error'
+  /articles/{slug}:
+    get:
+      operationId: articles-getArticlesBySlug
+      summary: Get an article
+      description: Get an article. Auth not required
+      tags:
+        - Articles
+      security:
+        - Authorization: []
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  article:
+                    type: object
+                    properties:
+                      slug:
+                        type: string
+                        minLength: 1
+                      title:
+                        type: string
+                        minLength: 1
+                      description:
+                        type: string
+                        minLength: 1
+                      body:
+                        type: string
+                        minLength: 1
+                      tagList:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            value:
+                              type: string
+                          required:
+                            - value
+                          additionalProperties: false
+                        nullable: true
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
+                      favorited:
+                        type: boolean
+                      favoritesCount:
+                        type: number
+                      author:
+                        type: object
+                        properties:
+                          username:
+                            type: string
+                            minLength: 1
+                          bio:
+                            type: string
+                            nullable: true
+                          image:
+                            type: string
+                            format: uri
+                            nullable: true
+                          following:
+                            type: boolean
+                            default: false
+                        required:
+                          - username
+                        additionalProperties: false
+                    required:
+                      - slug
+                      - title
+                      - description
+                      - body
+                      - createdAt
+                      - updatedAt
+                      - favorited
+                      - favoritesCount
+                      - author
+                    additionalProperties: false
+                required:
+                  - article
+                additionalProperties: false
+        default:
+          $ref: '#/components/responses/error'
+    put:
+      operationId: articles-updateArticle
+      summary: Update an article
+      description: Update an article. Auth is required
+      tags:
+        - Articles
+      security:
+        - Authorization: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                article:
+                  type: object
+                  properties:
+                    title:
+                      type: string
+                      minLength: 1
+                    description:
+                      type: string
+                      minLength: 1
+                    body:
+                      type: string
+                      minLength: 1
+                  additionalProperties: false
+              required:
+                - article
+              additionalProperties: false
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  article:
+                    type: object
+                    properties:
+                      slug:
+                        type: string
+                        minLength: 1
+                      title:
+                        type: string
+                        minLength: 1
+                      description:
+                        type: string
+                        minLength: 1
+                      body:
+                        type: string
+                        minLength: 1
+                      tagList:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            value:
+                              type: string
+                          required:
+                            - value
+                          additionalProperties: false
+                        nullable: true
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
+                      favorited:
+                        type: boolean
+                      favoritesCount:
+                        type: number
+                      author:
+                        type: object
+                        properties:
+                          username:
+                            type: string
+                            minLength: 1
+                          bio:
+                            type: string
+                            nullable: true
+                          image:
+                            type: string
+                            format: uri
+                            nullable: true
+                          following:
+                            type: boolean
+                            default: false
+                        required:
+                          - username
+                        additionalProperties: false
+                    required:
+                      - slug
+                      - title
+                      - description
+                      - body
+                      - createdAt
+                      - updatedAt
+                      - favorited
+                      - favoritesCount
+                      - author
+                    additionalProperties: false
+                required:
+                  - article
+                additionalProperties: false
+        default:
+          $ref: '#/components/responses/error'
+    delete:
+      operationId: articles-deleteArticle
+      summary: Delete an article
+      description: Delete an article. Auth is required
+      tags:
+        - Articles
+      security:
+        - Authorization: []
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema: {}
+        default:
+          $ref: '#/components/responses/error'
+  /articles/{slug}/comments:
+    get:
+      operationId: comments-getCommentsForArticle
+      summary: Get comments for an article
+      description: Get the comments for an article. Auth is optional
+      tags:
+        - Comments
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  comments:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        createdAt:
+                          type: string
+                          format: date-time
+                        updatedAt:
+                          type: string
+                          format: date-time
+                        body:
+                          type: string
+                          minLength: 1
+                        author:
+                          type: object
+                          properties:
+                            username:
+                              type: string
+                              minLength: 1
+                            bio:
+                              type: string
+                              nullable: true
+                            image:
+                              type: string
+                              format: uri
+                              nullable: true
+                            following:
+                              type: boolean
+                              default: false
+                          required:
+                            - username
+                          additionalProperties: false
+                      required:
+                        - id
+                        - createdAt
+                        - updatedAt
+                        - body
+                        - author
+                      additionalProperties: false
+                required:
+                  - comments
+                additionalProperties: false
+        default:
+          $ref: '#/components/responses/error'
+    post:
+      operationId: comments-addCommentToArticle
+      summary: Create a comment for an article
+      description: Create a comment for an article. Auth is required
+      tags:
+        - Comments
+      security:
+        - Authorization: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                comment:
+                  type: object
+                  properties:
+                    body:
+                      type: string
+                      minLength: 1
+                  required:
+                    - body
+                  additionalProperties: false
+              required:
+                - comment
+              additionalProperties: false
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  comment:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
+                      body:
+                        type: string
+                        minLength: 1
+                      author:
+                        type: object
+                        properties:
+                          username:
+                            type: string
+                            minLength: 1
+                          bio:
+                            type: string
+                            nullable: true
+                          image:
+                            type: string
+                            format: uri
+                            nullable: true
+                          following:
+                            type: boolean
+                            default: false
+                        required:
+                          - username
+                        additionalProperties: false
+                    required:
+                      - id
+                      - createdAt
+                      - updatedAt
+                      - body
+                      - author
+                    additionalProperties: false
+                required:
+                  - comment
+                additionalProperties: false
+        default:
+          $ref: '#/components/responses/error'
+  /articles/{slug}/comments/{id}:
+    delete:
+      operationId: comments-removeCommentFromArticle
+      summary: Delete a comment for an article
+      description: Delete a comment for an article. Auth is required
+      tags:
+        - Comments
+      security:
+        - Authorization: []
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema: {}
+        default:
+          $ref: '#/components/responses/error'
+  /articles/{slug}/favorite:
+    post:
+      operationId: favorites-addArticleAsFavorite
+      summary: Favorites an article
+      description: Favorites an article. Auth is required
+      tags:
+        - Favorites
+      security:
+        - Authorization: []
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  article:
+                    type: object
+                    properties:
+                      slug:
+                        type: string
+                        minLength: 1
+                      title:
+                        type: string
+                        minLength: 1
+                      description:
+                        type: string
+                        minLength: 1
+                      body:
+                        type: string
+                        minLength: 1
+                      tagList:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            value:
+                              type: string
+                          required:
+                            - value
+                          additionalProperties: false
+                        nullable: true
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
+                      favorited:
+                        type: boolean
+                      favoritesCount:
+                        type: number
+                      author:
+                        type: object
+                        properties:
+                          username:
+                            type: string
+                            minLength: 1
+                          bio:
+                            type: string
+                            nullable: true
+                          image:
+                            type: string
+                            format: uri
+                            nullable: true
+                          following:
+                            type: boolean
+                            default: false
+                        required:
+                          - username
+                        additionalProperties: false
+                    required:
+                      - slug
+                      - title
+                      - description
+                      - body
+                      - createdAt
+                      - updatedAt
+                      - favorited
+                      - favoritesCount
+                      - author
+                    additionalProperties: false
+                required:
+                  - article
+                additionalProperties: false
+        default:
+          $ref: '#/components/responses/error'
+    delete:
+      operationId: favorites-removeArticleFromFavorite
+      summary: Unfavorite an article
+      description: Unfavorite an article. Auth is required
+      tags:
+        - Favorites
+      security:
+        - Authorization: []
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  article:
+                    type: object
+                    properties:
+                      slug:
+                        type: string
+                        minLength: 1
+                      title:
+                        type: string
+                        minLength: 1
+                      description:
+                        type: string
+                        minLength: 1
+                      body:
+                        type: string
+                        minLength: 1
+                      tagList:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            value:
+                              type: string
+                          required:
+                            - value
+                          additionalProperties: false
+                        nullable: true
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
+                      favorited:
+                        type: boolean
+                      favoritesCount:
+                        type: number
+                      author:
+                        type: object
+                        properties:
+                          username:
+                            type: string
+                            minLength: 1
+                          bio:
+                            type: string
+                            nullable: true
+                          image:
+                            type: string
+                            format: uri
+                            nullable: true
+                          following:
+                            type: boolean
+                            default: false
+                        required:
+                          - username
+                        additionalProperties: false
+                    required:
+                      - slug
+                      - title
+                      - description
+                      - body
+                      - createdAt
+                      - updatedAt
+                      - favorited
+                      - favoritesCount
+                      - author
+                    additionalProperties: false
+                required:
+                  - article
+                additionalProperties: false
+        default:
+          $ref: '#/components/responses/error'
+  /profiles/{username}:
+    get:
+      operationId: profiles-getProfileByName
+      summary: Get a profile
+      description: Get a profile of a user of the system. Auth is optional
+      tags:
+        - Profile
+      security:
+        - Authorization: []
+      parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  profile:
+                    type: object
+                    properties:
+                      username:
+                        type: string
+                        minLength: 1
+                      bio:
+                        type: string
+                        nullable: true
+                      image:
+                        type: string
+                        format: uri
+                        nullable: true
+                      following:
+                        type: boolean
+                        default: false
+                    required:
+                      - username
+                    additionalProperties: false
+                required:
+                  - profile
+                additionalProperties: false
+        default:
+          $ref: '#/components/responses/error'
+  /profiles/{username}/follow:
+    post:
+      operationId: profiles-followProfile
+      summary: Follow a user
+      description: Follow a user by username
+      tags:
+        - Profile
+      security:
+        - Authorization: []
+      parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  profile:
+                    type: object
+                    properties:
+                      username:
+                        type: string
+                        minLength: 1
+                      bio:
+                        type: string
+                        nullable: true
+                      image:
+                        type: string
+                        format: uri
+                        nullable: true
+                      following:
+                        type: boolean
+                        default: false
+                    required:
+                      - username
+                    additionalProperties: false
+                required:
+                  - profile
+                additionalProperties: false
+        default:
+          $ref: '#/components/responses/error'
+    delete:
+      operationId: profiles-unFollowProfile
+      summary: Unfollow a user
+      description: Unfollow a user by username
+      tags:
+        - Profile
+      security:
+        - Authorization: []
+      parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  profile:
+                    type: object
+                    properties:
+                      username:
+                        type: string
+                        minLength: 1
+                      bio:
+                        type: string
+                        nullable: true
+                      image:
+                        type: string
+                        format: uri
+                        nullable: true
+                      following:
+                        type: boolean
+                        default: false
+                    required:
+                      - username
+                    additionalProperties: false
+                required:
+                  - profile
+                additionalProperties: false
+        default:
+          $ref: '#/components/responses/error'
+  /tags:
+    get:
+      operationId: tags-getUniqueTags
+      summary: Get tags
+      description: Get tags. Auth not required
+      tags:
+        - Tags
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tags:
+                    type: array
+                    items:
+                      type: string
+                required:
+                  - tags
+                additionalProperties: false
+        default:
+          $ref: '#/components/responses/error'
+  /users/login:
+    post:
+      operationId: auth-login
+      summary: Existing user login
+      description: Login for existing user
+      tags:
+        - User and Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                      format: email
+                    password:
+                      type: string
+                      minLength: 8
+                  required:
+                    - email
+                    - password
+                  additionalProperties: false
+              required:
+                - user
+              additionalProperties: false
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    type: object
+                    properties:
+                      email:
+                        type: string
+                        format: email
+                      username:
+                        type: string
+                        minLength: 1
+                      token:
+                        type: string
+                        minLength: 1
+                      bio:
+                        type: string
+                        minLength: 1
+                        nullable: true
+                      image:
+                        type: string
+                        format: uri
+                        nullable: true
+                    required:
+                      - email
+                      - username
+                      - token
+                    additionalProperties: false
+                required:
+                  - user
+                additionalProperties: false
+        default:
+          $ref: '#/components/responses/error'
+  /users:
+    post:
+      operationId: auth-register
+      summary: Register a new user
+      description: Register a new user
+      tags:
+        - User and Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    username:
+                      type: string
+                      minLength: 1
+                    email:
+                      type: string
+                      format: email
+                    password:
+                      type: string
+                      minLength: 8
+                  required:
+                    - username
+                    - email
+                    - password
+                  additionalProperties: false
+              required:
+                - user
+              additionalProperties: false
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    type: object
+                    properties:
+                      email:
+                        type: string
+                        format: email
+                      username:
+                        type: string
+                        minLength: 1
+                      token:
+                        type: string
+                        minLength: 1
+                      bio:
+                        type: string
+                        minLength: 1
+                        nullable: true
+                      image:
+                        type: string
+                        format: uri
+                        nullable: true
+                    required:
+                      - email
+                      - username
+                      - token
+                    additionalProperties: false
+                required:
+                  - user
+                additionalProperties: false
+        default:
+          $ref: '#/components/responses/error'
+  /user:
+    get:
+      operationId: auth-me
+      summary: Get current user
+      description: Gets the currently logged-in user
+      tags:
+        - User and Authentication
+      security:
+        - Authorization: []
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    type: object
+                    properties:
+                      email:
+                        type: string
+                        format: email
+                      username:
+                        type: string
+                        minLength: 1
+                      token:
+                        type: string
+                        minLength: 1
+                      bio:
+                        type: string
+                        minLength: 1
+                        nullable: true
+                      image:
+                        type: string
+                        format: uri
+                        nullable: true
+                    required:
+                      - email
+                      - username
+                      - token
+                    additionalProperties: false
+                required:
+                  - user
+                additionalProperties: false
+        default:
+          $ref: '#/components/responses/error'
+    put:
+      operationId: auth-updateUser
+      summary: Update current user
+      description: Updated user information for current user
+      tags:
+        - User and Authentication
+      security:
+        - Authorization: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                username:
+                  type: string
+                  minLength: 1
+                token:
+                  type: string
+                  minLength: 1
+                bio:
+                  type: string
+                  minLength: 1
+                  nullable: true
+                image:
+                  type: string
+                  format: uri
+                  nullable: true
+                password:
+                  type: string
+                  minLength: 8
+              additionalProperties: false
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    type: object
+                    properties:
+                      email:
+                        type: string
+                        format: email
+                      username:
+                        type: string
+                        minLength: 1
+                      token:
+                        type: string
+                        minLength: 1
+                      bio:
+                        type: string
+                        minLength: 1
+                        nullable: true
+                      image:
+                        type: string
+                        format: uri
+                        nullable: true
+                    required:
+                      - email
+                      - username
+                      - token
+                    additionalProperties: false
+                required:
+                  - user
+                additionalProperties: false
+        default:
+          $ref: '#/components/responses/error'
+components:
+  securitySchemes:
+    Authorization:
+      type: http
+      scheme: bearer
+  responses:
+    error:
+      description: Error response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              code:
+                type: string
+              issues:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                  required:
+                    - message
+                  additionalProperties: false
+            required:
+              - message
+              - code
+            additionalProperties: false
+tags:
+  - name: Articles
+  - name: Comments
+  - name: Favorites
+  - name: Profile
+  - name: Tags
+  - name: User and Authentication
+externalDocs:
+  url: https://github.com/jlalmes/trpc-openapi
