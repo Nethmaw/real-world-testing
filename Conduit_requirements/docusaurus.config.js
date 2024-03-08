@@ -78,7 +78,6 @@ const config = {
             sidebarId: 'api',
             label: 'API',
           },
-          //{to: '/api', label: 'API', position: 'left', activeBaseRegex: `/api/`,},
           {
             href: 'https://github.com/SaraGitTest/real-world-testing',
             label: 'GitHub',
@@ -90,13 +89,7 @@ const config = {
         style: 'dark',
         links: [
           {
-            // title: 'Docs',
-            // items: [
-            //   {
-            //     label: 'Contents',
-            //     to: '/docs/intro',
-            //   },
-            // ],
+            
           },
         ],
         copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,

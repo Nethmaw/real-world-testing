@@ -123,7 +123,8 @@ Returns most recent articles globally by default
 
 Fields: Tag, author or favourited query parameter to filter results
 
-## Query Parameters:
+**Query Parameters**
+
 Filter by tag:  
 
 ?tag=AngularJS  
